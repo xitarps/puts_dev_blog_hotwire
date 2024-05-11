@@ -1,0 +1,5 @@
+<p class="my-5">
+  <strong class="block font-medium mb-1">Likes:</strong>
+  <%= article.likes.size %>
+  <%= link_to (!article.likes.where(user: current_user).any? ? '♡' : '♥' ), like_article_path(article), data: { turbo_prefetch: false } %>
+</p>

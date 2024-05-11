@@ -58,6 +58,16 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def like
+    @article = Article.find params[:id]
+    @like = @article.likes.where(user: current_user)
+    if @like.any?
+      @like.first.destroy
+    else
+      @article.likes.create(user: current_user)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article

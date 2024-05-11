@@ -1,17 +1,31 @@
-<div id="<%= dom_id article %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= article.title %>
-  </p>
+<%= turbo_frame_tag dom_id(article) do %>
+  <div>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Title:</strong>
+      <%= action_name == 'index' ? article.title.truncate(4) : article.title %>
+    </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Content:</strong>
-    <%= article.content %>
-  </p>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Content:</strong>
+      <%= action_name == 'index' ? article.content.truncate(4) : article.content %>
+    </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= article.user.email %>
-  </p>
+    <p class="my-5">
+      <strong class="block font-medium mb-1">User:</strong>
+      <%= article.user.email %>
+    </p>
 
-</div>
+    <% if user_signed_in? %>
+      <%= turbo_frame_tag 'likes' do %>
+        <%= render  "articles/like", article: article %>
+      <% end %>
+    <% end %>
+    
+
+    <% if action_name == 'index' %>
+      <p>
+        <%= link_to "Show this article", article, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
