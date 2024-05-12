@@ -1,24 +1,20 @@
-# README
+## PUTS DEV - blog (Hotwire)
+Puts dev, Que tal explorar um pouco do Hotwire?
+Esse projeto tem o intuito de ter um blog utilizando as tecnologias do Hotwire com Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<hr>
+HotWire:
+https://hotwired.dev/
 
-Things you may want to cover:
 
-* Ruby version
+Turbo HandBook(doc):
+https://turbo.hotwired.dev/handbook/introduction
 
-* System dependencies
 
-* Configuration
+Turbo-rails(git):
+https://github.com/hotwired/turbo-rails
 
-* Database creation
+## Youtube
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Youtube link(turbo drive)](https://www.youtube.com/watch?v=pALX82s6Btk)
+[Youtube link(turbo frame)](https://www.youtube.com/watch?v=9HXKiUf39X8)
