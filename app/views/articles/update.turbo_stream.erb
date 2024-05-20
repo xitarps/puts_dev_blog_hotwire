@@ -1,6 +1,4 @@
-<%= turbo_frame_tag dom_id(@article) do %>
-  <%= render "form", article: @article %>
+<%= turbo_stream.replace @article do %>
+  <%= render @article %>
   <%= link_to "Back to articles", articles_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 <% end %>
-
-
