@@ -13,8 +13,14 @@
 
   <div class="my-5">
     <%= form.label :title %>
-    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <div data-controller='custom'>
+      <%= form.text_field :title, data: { action: 'input->custom#update_hint' }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+      <div data-custom-target="hint">
+        conteudo
+      </div>
+    </div>
   </div>
+
 
   <div class="my-5">
     <%= form.label :content %>
