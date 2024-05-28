@@ -15,7 +15,8 @@
       <%= article.user.email %>
     </p>
 
-    <% if user_signed_in? %>
+    <%= current_user_tmp = nil %>
+    <% if current_user_tmp&.present? %>
       <%= turbo_frame_tag 'likes' do %>
         <%= render  "articles/like", article: article %>
       <% end %>
@@ -29,12 +30,12 @@
 
 
     <% end %>
-    <% if article.user_id == current_user.id %>
+
       <%= link_to "Edit this article", edit_article_path(article), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <div class="inline-block ml-2">
         <%= link_to "Destroy this article", article, data: { turbo_method: :delete }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
       </div>
-    <% end %>
+
   </div>
 <% end %>
 

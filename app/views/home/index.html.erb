@@ -1,5 +1,9 @@
 <div>
   <h1 class="font-bold text-4xl">Todos os artigos:</h1>
 
-  <%= render @articles %>
+  <%= turbo_stream_from "home_stream" %>
+
+  <div id="home_articles_list">
+    <%= render @articles %>
+  </div>
 </div>
