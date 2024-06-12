@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_043645) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_12_030649) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
@@ -21,6 +22,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_043645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "chat_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "chat_id", null: false
+    t.bigint "sender_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_chat_messages_on_chat_id"
+    t.index ["sender_id"], name: "index_chat_messages_on_sender_id"
+  end
+
+  create_table "chats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_open_chat_id", null: false
+    t.bigint "user_destination_chat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_destination_chat_id"], name: "index_chats_on_user_destination_chat_id"
+    t.index ["user_open_chat_id"], name: "index_chats_on_user_open_chat_id"
   end
 
   create_table "followerships", force: :cascade do |t|
@@ -54,6 +74,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_043645) do
   end
 
   add_foreign_key "articles", "users"
+  add_foreign_key "chat_messages", "chats"
+  add_foreign_key "chat_messages", "users", column: "sender_id"
+  add_foreign_key "chats", "users", column: "user_destination_chat_id"
+  add_foreign_key "chats", "users", column: "user_open_chat_id"
   add_foreign_key "followerships", "users"
   add_foreign_key "followerships", "users", column: "following_id"
   add_foreign_key "likes", "articles"

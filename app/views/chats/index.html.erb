@@ -1,0 +1,7 @@
+<div style="display: flex; flex-direction: column">
+  <h2 style="font-size: 36px !important;">Chats</h2>
+
+  <% @users.each do |user| %>
+    <%= link_to  user.email, chats_path(destination_id: user.id), data: { turbo_method: :post }, style: 'color: blue' %>
+  <% end %>
+</div>

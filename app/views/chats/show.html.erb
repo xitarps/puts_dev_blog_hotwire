@@ -1,0 +1,23 @@
+<%= turbo_stream_from "chat_messages_channel_#{@chat.id}" %>
+
+<div style="display: flex; flex-direction: column">
+  <div>
+    <h2 style="font-size: 36px !important;">Chat</h2>
+    (with: <%= @destination.email %>)
+  </div>
+
+  <hr>
+
+  <%= form_with model: ChatMessage.new do |f| %>
+    <%= f.hidden_field :chat_id, value: @chat.id %>
+    <%= f.text_field :message %>
+
+    <%= f.submit '➮', style: 'font-size: 36px' %>
+  <% end %>
+
+  <div id="chat-messages-list" style="display: flex; flex-direction: column">
+    <% @chat_messages.each do |message| %>
+      <span><%= message.sender.email.split('@').first %>: <%= message.message %></span>
+    <% end %>
+  </div>
+</div>

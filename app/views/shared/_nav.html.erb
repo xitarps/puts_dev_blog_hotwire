@@ -2,6 +2,7 @@
 <%= link_to 'Articles', articles_path %> | 
 
 <% if user_signed_in? %>
+  <%= link_to 'Chats', chats_path %> | 
   <%= link_to  "Logout", destroy_user_session_path, data: { turbo_method: :delete } %> | 
   <%= current_user.email %>
 <% else %>
